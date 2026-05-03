@@ -81,11 +81,11 @@ export default function Deliverables() {
               <p className="del-title">Captação (Presencial ou Remota)</p>
               <p className="del-desc">Quando viável, captação presencial. Quando remoto, orientação completa: ângulo, luz, postura, fala e entrega de câmera.</p>
             </Reveal>
-            <Reveal delay={3} className="del-card del-card--branding">
+            <Reveal delay={3} className="del-card">
               <IconBrush />
               <p className="del-title">Branding</p>
               <p className="del-desc">
-                Identidade visual completa: logotipo e variações, paleta de cores estratégica, tipografia, briefing de marca e manual de aplicação. Arquivos entregues em SVG, PNG e PDF.
+                Identidade visual completa: logotipo e variações, paleta de cores estratégica, tipografia, briefing de marca e manual de aplicação. Arquivos em SVG, PNG e PDF.
               </p>
               <div className="del-branding-footer">
                 <span className="del-branding-tag del-branding-aura">✓ Incluso no Aura</span>
@@ -122,10 +122,6 @@ export default function Deliverables() {
         </Reveal>
 
         <style>{`
-          .del-card--branding {
-            border-color: rgba(201,169,110,0.22) !important;
-            background: rgba(201,169,110,0.03);
-          }
           .del-branding-footer {
             display: flex;
             gap: 8px;
@@ -143,12 +139,10 @@ export default function Deliverables() {
           .del-branding-aura {
             color: #E8A0A0;
             border-color: rgba(232,160,160,0.3);
-            background: rgba(232,160,160,0.06);
           }
           .del-branding-eter {
             color: #C9A96E;
             border-color: rgba(201,169,110,0.3);
-            background: rgba(201,169,110,0.06);
           }
         `}</style>
       </CenterWrapper>
