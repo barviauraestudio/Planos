@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import Cursor from './components/Cursor'
 import ScrollProgress from './components/ScrollProgress'
 import Nav from './components/Nav'
 import MobileMenu from './components/MobileMenu'
@@ -13,6 +12,7 @@ import FAQ from './components/FAQ'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import AudioPlayer from './components/AudioPlayer'
+import SoftAurora from './components/SoftAurora'
 
 function BackToTop() {
   const [visible, setVisible] = useState(false)
@@ -98,6 +98,17 @@ function BackToTop() {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isAuroraVisible, setIsAuroraVisible] = useState(true)
+
+  useEffect(() => {
+    function handleScroll() {
+      setIsAuroraVisible(window.scrollY < window.innerHeight * 1.6)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   function toggleMenu() {
     setMenuOpen(prev => {
@@ -113,17 +124,38 @@ function App() {
 
   return (
     <>
-      <Cursor />
+      <div className="aurora-stage" aria-hidden="true">
+        <SoftAurora
+          speed={0.6}
+          scale={1.5}
+          brightness={1.2}
+          color1="#f7f7f7"
+          color2="#ff0000"
+          noiseFrequency={2.5}
+          noiseAmplitude={1}
+          bandHeight={0.5}
+          bandSpread={1}
+          octaveDecay={0.1}
+          layerOffset={0}
+          colorSpeed={1}
+          enableMouseInteraction
+          mouseInfluence={0.25}
+          visible={isAuroraVisible}
+        />
+      </div>
+      <div className={`aurora-veil${isAuroraVisible ? ' visible' : ''}`} aria-hidden="true" />
       <ScrollProgress />
       <MobileMenu open={menuOpen} onClose={closeMenu} />
       <Nav menuOpen={menuOpen} onToggle={toggleMenu} />
       <Hero />
-      <Plans />
-      <ComparisonTable />
-      <Deliverables />
-      <Workflow />
-      <Results />
-      <FAQ />
+      <main id="plans-content" className="middle-sections-container theme-light">
+        <Plans />
+        <ComparisonTable />
+        <Deliverables />
+        <Workflow />
+        <Results />
+        <FAQ />
+      </main>
       <CTA />
       <Footer />
       <AudioPlayer src="/SITE-AURA-AUDIO.MP3" />
